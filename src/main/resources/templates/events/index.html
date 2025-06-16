@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>Events List</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}">
+    <link th:href="@{/css/styles.css}" rel="stylesheet"/>
+</head>
+<body>
+<header>
+    <div th:insert="~{nav :: navbar}"></div>
+</header>
+<div class="container">
+    <main role="main" class="pb-3">
+        <div class="mb-4">
+            <h1 class="text-center">Events</h1>
+        </div>
+
+        <div class="mb-4">
+            <a class="btn btn-success" th:href="@{/event/create}" th:if="${isLoggedIn}"><i class="fa fa-plus"></i> Add
+                Event</a>
+        </div>
+
+        <form th:action="@{/events}" method="get" id="dateFilterForm">
+            <div class="row mb-3">
+                <div class="col">
+                    <label for="filterDateOption">Events Starting:</label>
+                    <select id="filterDateOption" name="filterDateOption" class="form-control"
+                            onchange="this.form.submit()">
+                        <option value="all" th:selected="${filterDateOption == 'all'}">All Dates</option>
+                        <option value="after" th:selected="${filterDateOption == 'after'}">After</option>
+                        <option value="before" th:selected="${filterDateOption == 'before'}">Before</option>
+                        <option value="between" th:selected="${filterDateOption == 'between'}">Between</option>
+                    </select>
+                </div>
+
+                <div class="col"
+                     th:if="${filterDateOption == 'after' || filterDateOption == 'before' || filterDateOption == 'between'}">
+                    <label for="startDate1">Start Date:</label>
+                    <input type="date" id="startDate1" name="startDate1" th:value="${startDate1}" class="form-control"
+                           required>
+                </div>
+
+                <div class="col" th:if="${filterDateOption == 'between'}">
+                    <label for="startDate2">To Date:</label>
+                    <input type="date" id="startDate2" name="startDate2" th:value="${startDate2}" class="form-control"
+                           required>
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-between mb-4">
+                <button type="submit" class="btn btn-primary">Filter Events</button>
+            </div>
+        </form>
+
+
+        <p class="text-dark" th:if="${events == null || events.isEmpty()}">No events available.</p>
+
+        <table class="table table-light" th:if="${events != null && !events.isEmpty()}">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Price</th>
+                <th><span th:if="${isLoggedIn}" th:text="'Manage'"></span></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="event : ${events}">
+                <td class="name-column"><span th:text="${event.name}"></span></td>
+                <td class="description-column"><span th:text="${event.description}"></span></td>
+                <td><span th:text="${event.startDate}"></span></td>
+                <td><span th:text="${event.endDate}"></span></td>
+                <td>
+                    <span th:if="${event.price == 0}" th:text="'Free'"></span>
+                    <span th:unless="${event.price == 0}" th:text="'$' + ${event.price}"></span>
+                </td>
+                <td>
+                    <a class="btn btn-outline-primary btn-sm mr-2" th:href="@{'/event/' + ${event.id}}">
+                        <i class="fas fa-info-circle"></i> Details
+                    </a>
+                    <a class="btn btn-outline-primary btn-sm mr-2" th:href="@{'/event/' + ${event.id} + '/edit'}"
+                       th:if="${isLoggedIn}">
+                        <i class="fas fa-edit"></i> Edit
+                    </a>
+                    <a class="btn btn-outline-danger btn-sm" th:href="@{'/event/delete/' + ${event.id}}"
+                       th:if="${isLoggedIn}">
+                        <i class="fas fa-trash-alt"></i> Delete
+                    </a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </main>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

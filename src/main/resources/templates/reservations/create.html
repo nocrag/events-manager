@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>Request Reservation</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}">
+    <link th:href="@{/css/styles.css}" rel="stylesheet"/>
+</head>
+<body>
+<header>
+    <div th:insert="~{nav :: navbar}"></div>
+</header>
+
+<div class="container">
+    <div class="mt-3">
+        <a th:href="@{/reservations}" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Back</a>
+    </div>
+
+    <main role="main" class="pb-3">
+        <div class="row" th:if="${successMessage == null}">
+            <div class="col-md-6">
+                <h2 class="mb-4">Request Reservation</h2>
+
+                <form th:action="@{/reservation/create}" method="get">
+                    <div class="form-group mb-3">
+
+                        <label class="control-label">Select Event:</label>
+                        <select name="eventId" class="form-control" onchange="this.form.submit()">
+                            <option value="">-- Choose an event --</option>
+                            <option th:each="event : ${events}"
+                                    th:value="${event.id}"
+                                    th:selected="${event.id == selectedEventId}"
+                                    th:text="${event.name}">
+                            </option>
+                        </select>
+                    </div>
+                </form>
+
+                <form th:action="@{/reservation/create}" method="post" th:object="${reservation}"
+                      th:if="${selectedEventId != null}">
+                    <input type="hidden" name="eventId" th:value="${selectedEventId}"/>
+
+                    <div class="form-group">
+                        <label class="control-label">Seating:</label>
+                        <select name="seatingId" class="form-control">
+                            <option value="">-- Choose a Seating --</option>
+                            <option th:each="seating : ${seatings}"
+                                    th:value="${seating.id}"
+                                    th:text="${#temporals.format(seating.seatingDateTime, 'yyyy-MM-dd HH:mm')}"
+                                    th:selected="${seating.id == selectedSeatingId}">
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label">Group Size:</label>
+                        <input type="number" th:field="*{groupSize}" class="form-control"/>
+                        <div class="alert alert-warning" th:errors="*{groupSize}"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label">First Name:</label>
+                        <input maxlength="255" th:field="*{firstName}" class="form-control"/>
+                        <div class="alert alert-warning" th:errors="*{firstName}"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label">Last Name:</label>
+                        <input type="text" th:field="*{lastName}" class="form-control"/>
+                        <div class="alert alert-warning" th:errors="*{lastName}"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label">Email Address:</label>
+                        <input type="text" th:field="*{email}" class="form-control"/>
+                        <div class="alert alert-warning" th:errors="*{email}"></div>
+                    </div>
+
+                    <div class="form-group mt-3">
+                        <input type="submit" value="Save" class="btn btn-success"/>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div th:if="${successMessage}" class="alert alert-success">
+            <p th:text="${successMessage}"></p>
+        </div>
+    </main>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

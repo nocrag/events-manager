@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html" lang="en">
+<head>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}">
+    <link th:href="@{/css/styles.css}" rel="stylesheet"/>
+    <title>Create Layout</title>
+</head>
+<body>
+<header>
+    <div th:insert="~{nav :: navbar}"></div>
+</header>
+
+<div class="container">
+    <main role="main" class="pb-3">
+
+        <div th:if="${layouts == null || layouts.isEmpty()}">
+            <p class="text-dark">No layouts available. Please,
+                create a layout before creating a dining table.</p>
+
+            <a th:href="@{/layout/create}" class="btn btn-success">
+                <i class="fas fa-plus"></i> Add Layout
+            </a>
+        </div>
+
+        <div th:if="${layouts != null && !layouts.isEmpty()}">
+            <div class="row">
+                <div class="col-md-4">
+                    <form th:action="@{/dining-table/create}" method="post" th:object="${diningTable}">
+                        <div class="form-group">
+                            <div class="form-group">
+                                <label class="control-label">Layout:
+                                    <select th:field="*{layout}" class="form-control">
+                                        <option th:each="layout : ${layouts}"
+                                                th:value="${layout.id}"
+                                                th:text="${layout.name}"
+                                        ></option>
+                                    </select>
+                                </label>
+                                <div class="alert alert-warning" th:errors="*{layout}"></div>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label class="control-label">Number of seats:
+                                    <input th:field="*{numberOfSeats}" class="form-control"/>
+                                </label>
+                                <div class="alert alert-warning" th:errors="*{numberOfSeats}"></div>
+                            </div>
+
+                            <div class="form-group"><input type="submit" value="Save" class="btn btn-success"/></div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div>
+            <a class="btn btn-primary mt-3" th:href="@{/dining-tables}">
+                < Go Back
+            </a>
+        </div>
+
+    </main>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

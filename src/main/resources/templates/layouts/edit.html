@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html" lang="en">
+<head>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}">
+    <link th:href="@{/css/styles.css}" rel="stylesheet"/>
+    <title>Edit Layout</title>
+</head>
+<body>
+<header>
+    <div th:insert="~{nav :: navbar}"></div>
+</header>
+<div class="container">
+    <main role="main" class="pb-3">
+
+        <div class="row">
+            <div class="col-md-4">
+                <form th:action="@{/layout/edit}" method="post" th:object="${layout}">
+                    <input type="hidden" th:field="*{id}"/>
+                    <div class="form-group">
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Name:
+                            <input maxlength="255" th:field="*{name}" class="form-control"/>
+                        </label>
+                        <div class="alert alert-warning" th:errors="*{name}"></div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Description:
+                            <textarea maxlength="255" th:field="*{description}" class="form-control"></textarea>
+                        </label>
+                        <div class="alert alert-warning" th:errors="*{description}"></div>
+                    </div>
+                    <div class="form-group"><input type="submit" value="Save" class="btn btn-primary"/></div>
+                </form>
+            </div>
+        </div>
+
+        <h2 class="mb-3">Dining Tables for Layout: <span th:text="${layout.name}"></span></h2>
+        <div class="card p-3 mt-4 mb-4">
+            <h4>Add a New Dining Table</h4>
+            <form th:action="@{/layout/{id}/dining-tables/add(id=${layout.id})}" method="post">
+                <input type="hidden" name="layoutId" th:value="${layout.id}"/>
+                <div class="form-group">
+                    <label class="control-label d-block">Number of Seats:</label>
+                    <input type="number" name="numberOfSeats" class="form-control-sm w-5" required min="1"/>
+                </div>
+                <div class="form-group mt-2">
+                    <input type="submit" value="Add Dining Table" class="btn btn-primary"/>
+                </div>
+            </form>
+
+            <h4>Dining Tables</h4>
+            <table class="table table-striped table-hover mt-3">
+                <thead class="table-dark">
+                <tr>
+                    <th>Number of Seats</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="diningTable : ${diningTables}">
+                    <td th:text="${diningTable.numberOfSeats}"></td>
+                    <td>
+                        <form th:action="@{/dining-tables/delete/{tableId}(tableId=${diningTable.id})}" method="post">
+                            <input type="hidden" name="layoutId" th:value="${layout.id}"/>
+                            <button type="submit" class="btn btn-danger btn-sm">
+                                <i class="bi bi-trash"></i> Remove
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+    <div><a th:href="@{/layouts}">Go Back</a></div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+meta {
+  name: POST Reservation Request
+  type: http
+  seq: 6
+}
+
+post {
+  url: http://localhost:8080/api/reservation/request
+  body: json
+  auth: inherit
+}
+
+headers {
+  accept: */*
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "eventId":1,
+    "seatingId":1,
+    "firstName":"",
+    "lastName":"",
+    "email":"",
+    "groupSize":0
+  }
+}

@@ -1,0 +1,105 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #fafafa;
+    font-family: 'roboto', sans-serif, 'arial'
+}
+
+.homepage {
+    background-image: url('../images/bg_home.png');
+    background-size: 20%; /* Adjust the size as needed */
+    background-position: bottom right;
+    background-repeat: no-repeat;
+    height: 100vh;
+}
+
+
+header {
+    padding: 10px;
+    background-color: #333;
+}
+
+.navbar {
+    background-color: #333;
+    width: 100%;
+}
+
+.navbar .nav-link {
+    color: #fff !important;
+    font-weight: 500;
+    padding: 10px 15px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.navbar .nav-link:hover {
+    background-color: #555;
+    color: #fff !important;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+main {
+    margin-top: 20px;
+}
+
+h1 {
+    font-size: 3rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.description-column {
+    word-wrap: break-word;
+    max-width: 300px;
+}
+
+.name-column {
+    word-wrap: break-word;
+    max-width: 150px;
+}
+
+
+.custom-btn {
+    padding: 15px 30px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: 50px;
+    transition: background-color 0.3s ease;
+}
+
+.custom-btn:hover {
+    background-color: #444;
+    color: #fff;
+}
+
+.btn-primary {
+    background-color: #0069d9;
+    border: none;
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+    border: none;
+}
+
+.btn-success {
+    background-color: #28a745;
+    border: none;
+}
+
+.card {
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
