@@ -1,37 +1,63 @@
-# 📅 Events Manager App
+# SpringResto - Restaurant Event Management App
 
-A web application built with **Spring Boot**, **Thymeleaf**, and **MySQL**, designed to manage events, venues, and reservations. Deployed using **Apache Tomcat**.
+SpringResto is a full-stack restaurant event management web application built with **Spring Boot**, **Thymeleaf**, **MySQL**, and **Docker**.
 
 ---
 
 ## 🚀 Features
 
-- 🗓️ Create, edit, and delete events
-- 🏢 Associate events with venues
-- 🪑 Manage seating for each event
-- 🙋 Handle reservation requests with approval/denial workflow + email sending
-- 🔍 Filter reservations by event and status
-- 💻 Responsive UI using Thymeleaf + Bootstrap
+- User login/logout
+- Create and edit events
+- Add seating times with duration
+- Assign menus and layouts to events
+- View seatings per day
+- Archive past events
+- Filter events by date (All, Before, After, Between)
+- Responsive interface using Bootstrap
 
 ---
 
-## 🛠️ Tech Stack
+## 🐳 Running the Project with Docker (Recommended)
 
-| Layer      | Technology                               |
-| ---------- | ---------------------------------------- |
-| Backend    | Spring Boot, Spring MVC, Spring Data JPA |
-| Frontend   | Thymeleaf, HTML, Bootstrap               |
-| Database   | MySQL                                    |
-| Server     | Apache Tomcat                            |
-| Build Tool | Maven                                    |
+### ✅ Requirements
 
----
+- [Docker](https://www.docker.com/)
+- [Docker Compose](https://docs.docker.com/compose/)
+- Java 17+ (if running without Docker)
 
-## 💾 Getting Started
+### 🔧 Setup Steps
 
-### ✅ Prerequisites
+```bash
+# 1. Clone the repository
+git clone https://github.com/YOUR-USERNAME/springresto.git
+cd springresto
 
-- Java 17+
-- Maven 3.x
-- MySQL Server
-- Apache Tomcat (for deployment)
+# 2. Build the project
+./mvnw clean package -DskipTests
+
+# 3. Start the app with Docker
+docker compose up --build
+
+### 🔐 Database Configuration
+
+The application uses a MySQL database. When using Docker, the configuration is handled in the `docker-compose.yml` file. If running locally, make sure your `application.properties` matches the database settings below.
+
+#### 📦 Docker DB Settings
+
+| Property             | Value         |
+|----------------------|---------------|
+| Database Name        | `springresto` |
+| MySQL Username       | `devJPA`      |
+| MySQL Password       | `NBCC1234!`   |
+| MySQL Root Password  | `root`        |
+| Port                 | `3306`        |
+
+#### ⚙️ `application.properties`
+
+```properties
+spring.datasource.url=jdbc:mysql://localhost:3306/springresto
+spring.datasource.username=devJPA
+spring.datasource.password=NBCC1234!
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
+spring.thymeleaf.cache=false
