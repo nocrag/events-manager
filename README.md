@@ -33,6 +33,9 @@ SpringResto is a full-stack restaurant event management web application built wi
 git clone https://github.com/nocrag/springresto.git
 cd springresto
 
+# 2. Run the SQL file
+The file is located in src/main/resources/data.sql
+
 # 2. Build the project
 ./mvnw clean package -DskipTests
 
