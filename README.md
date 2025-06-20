@@ -29,7 +29,7 @@ SpringResto is a full-stack restaurant event management web application built wi
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/YOUR-USERNAME/springresto.git
+git clone https://github.com/nocrag/springresto.git
 cd springresto
 
 # 2. Build the project
@@ -40,21 +40,23 @@ docker compose up --build
 
 ### 🔐 Database Configuration
 
-The application uses a MySQL database. When using Docker, the configuration is handled in the `docker-compose.yml` file. If running locally, make sure your `application.properties` matches the database settings below.
+The application uses a MySQL database. When using Docker, the configuration is handled in the
+`docker-compose.yml` file. If running locally, make sure your `application.properties` matches
+the database settings below.
 
-#### 📦 Docker DB Settings
+### 📦 Docker DB Settings
 
 | Property             | Value         |
 |----------------------|---------------|
-| Database Name        | `springresto` |
-| MySQL Username       | `devJPA`      |
-| MySQL Password       | `NBCC1234!`   |
-| MySQL Root Password  | `root`        |
-| Port                 | `3306`        |
+| Database Name        | springresto |
+| MySQL Username       | devJPA      |
+| MySQL Password       | NBCC1234!   |
+| MySQL Root Password  | root        |
+| Port                 | 3306        |
 
-#### ⚙️ `application.properties`
+### ⚙️ `application.properties`
 
-```properties
+properties
 spring.datasource.url=jdbc:mysql://localhost:3306/springresto
 spring.datasource.username=devJPA
 spring.datasource.password=NBCC1234!
