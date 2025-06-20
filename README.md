@@ -28,6 +28,16 @@ SpringResto is a full-stack restaurant event management web application built wi
 
 ### 🔧 Setup Steps
 
+### 📦 Docker DB Settings
+
+| Property             | Value         |
+|----------------------|---------------|
+| Database Name        | springresto |
+| MySQL Username       | devJPA      |
+| MySQL Password       | NBCC1234!   |
+| MySQL Root Password  | root        |
+| Port                 | 3306        |
+
 ```bash
 # 1. Clone the repository
 git clone https://github.com/nocrag/springresto.git
@@ -49,13 +59,5 @@ The application uses a MySQL database. When using Docker, the configuration is h
 `docker-compose.yml` file. If running locally, make sure your `application.properties` matches
 the database settings below.
 
-### 📦 Docker DB Settings
 
-| Property             | Value         |
-|----------------------|---------------|
-| Database Name        | springresto |
-| MySQL Username       | devJPA      |
-| MySQL Password       | NBCC1234!   |
-| MySQL Root Password  | root        |
-| Port                 | 3306        |
 
