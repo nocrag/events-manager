@@ -55,7 +55,7 @@ public class MenuItemController {
             model.addAttribute("menu", menu);
             model.addAttribute("menuItems", menuItemService.findMenuItemsByMenu(menu));
             model.addAttribute("menuEvents", eventService.findAllByMenu(menu));
-            return "/menus/detail";
+            return "menus/detail";
         }
 
         try {

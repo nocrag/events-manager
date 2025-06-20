@@ -64,7 +64,7 @@ public class ReservationController {
         model.addAttribute("selectedEventId", eventId);
         model.addAttribute("selectedStatus", status);
 
-        return "/reservations/index";
+        return "reservations/index";
     }
 
 
@@ -80,7 +80,7 @@ public class ReservationController {
         }
 
         model.addAttribute("reservation", new Reservation());
-        return "/reservations/create";
+        return "reservations/create";
     }
 
     @PostMapping("/reservation/create")
@@ -118,7 +118,7 @@ public class ReservationController {
         model.addAttribute("selectedSeatingId", selectedSeatingId);
 
         if (bindingResult.hasErrors()) {
-            return "/reservations/create";
+            return "reservations/create";
         }
 
         try {
@@ -130,10 +130,10 @@ public class ReservationController {
             model.addAttribute("reservation", new Reservation());
         } catch (Exception e) {
             model.addAttribute("errorMessage", e.getMessage());
-            return "/reservations/create";
+            return "reservations/create";
         }
 
-        return "/reservations/create";
+        return "reservations/create";
     }
 
 
@@ -167,7 +167,7 @@ public class ReservationController {
             model.addAttribute("diningTables", availableTables);
         }
 
-        return "/reservations/detail";
+        return "reservations/detail";
     }
 
 

@@ -42,14 +42,14 @@ public class DiningTableController {
     @GetMapping("/dining-tables")
     public String getAll(Model model) {
         model.addAttribute("diningTables", diningTableService.findAllActive());
-        return "/dining-tables/index";
+        return "dining-tables/index";
     }
 
     @GetMapping("/dining-table/create")
     public String create(Model model) {
         model.addAttribute("diningTable", new DiningTable());
 
-        return "/dining-tables/create";
+        return "dining-tables/create";
     }
 
     @GetMapping("/dining-tables/delete/{id}")
@@ -61,7 +61,7 @@ public class DiningTableController {
         }
 
         model.addAttribute("diningTable", diningTable);
-        return "/dining-tables/delete";
+        return "dining-tables/delete";
     }
 
     @GetMapping("/dining-tables/archived")
@@ -75,7 +75,7 @@ public class DiningTableController {
     @PostMapping("/dining-table/create")
     public String create(@Valid DiningTable diningTable, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return "/dining-tables/create";
+            return "dining-tables/create";
         }
 
         diningTableService.save(diningTable);
@@ -91,14 +91,4 @@ public class DiningTableController {
         return "redirect:/dining-tables";
     }
 
-
-//    @PostMapping("/dining-tables/delete/{id}")
-//    public String deleteDiningTable(@PathVariable Long id, @RequestParam(required = false) Long layoutId) {
-//        diningTableService.removeDiningTable(id);
-//
-//        if (layoutId != null) {
-//            return "redirect:/layout/edit/" + layoutId;
-//        }
-//        return "redirect:/dining-tables";
-//    }
 }

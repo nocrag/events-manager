@@ -11,9 +11,9 @@
 	<groupId>nbcc</groupId>
 	<artifactId>SpringResto</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
-	<name>SpringResto</name>
-	<description>SpringResto</description>
+	<packaging>jar</packaging>
+	<name>Events Manager</name>
+	<description>Events Manager</description>
 	<url/>
 	<licenses>
 		<license/>
@@ -82,7 +82,9 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-mail</artifactId>
 		</dependency>
+
 	</dependencies>
+
 
 	<build>
 		<plugins>

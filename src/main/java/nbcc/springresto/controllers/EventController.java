@@ -72,7 +72,7 @@ public class EventController {
         model.addAttribute("startDate2", startDate2Str);
         model.addAttribute("filterDateOption", filterDateOption);
 
-        return "/events/index";
+        return "events/index";
     }
 
 
@@ -86,7 +86,7 @@ public class EventController {
         model.addAttribute("layouts", availableLayouts);
         model.addAttribute("menus", availableMenus);
 
-        return "/events/create";
+        return "events/create";
     }
 
     @PostMapping("/event/create")
@@ -129,7 +129,7 @@ public class EventController {
             model.addAttribute("errorMessage", seatingErrors.toString());
             model.addAttribute("layouts", layoutService.findAll());
             model.addAttribute("menus", menuService.findAll());
-            return "/events/create";
+            return "events/create";
         }
 
         try {
@@ -160,13 +160,13 @@ public class EventController {
             bindingResult.addError(new FieldError("event", "menu", e.getMessage()));
             model.addAttribute("layouts", layoutService.findAll());
             model.addAttribute("menus", layoutService.findAll());
-            return "/events/create";
+            return "events/create";
 
         } catch (Exception e) {
             model.addAttribute("errorMessage", e.getMessage());
             model.addAttribute("layouts", layoutService.findAll());
             model.addAttribute("menus", menuService.findAll());
-            return "/events/create";
+            return "events/create";
         }
 
         return "redirect:/events";
@@ -186,7 +186,7 @@ public class EventController {
         model.addAttribute("isSameDayEvent", eventService.isSameDayEvent(event));
         model.addAttribute("seatingDates", seatingService.getEventSeatingDates(event));
 
-        return "/events/detail";
+        return "events/detail";
     }
 
     @GetMapping("/event/{id}/seatings")
@@ -206,7 +206,7 @@ public class EventController {
         model.addAttribute("isSameDayEvent", eventService.isSameDayEvent(event));
         model.addAttribute("seatingDates", seatingService.getEventSeatingDates(event));
 
-        return "/events/detail";
+        return "events/detail";
     }
 
     @GetMapping("/event/delete/{id}")
@@ -217,7 +217,7 @@ public class EventController {
         if (event != null && !event.isArchived()) {
             model.addAttribute("event", event);
             model.addAttribute("seatings", event.getSeatings());
-            return "/events/delete";
+            return "events/delete";
         }
 
         return "redirect:/events";
@@ -242,7 +242,7 @@ public class EventController {
                 model.addAttribute("event", event);
                 model.addAttribute("seatings", event.getSeatings());
             }
-            return "/events/delete";
+            return "events/delete";
         }
 
         return "redirect:/events";
@@ -272,7 +272,7 @@ public class EventController {
         model.addAttribute("selectedLayout", selectedLayout);
         model.addAttribute("layouts", availableLayouts);
         model.addAttribute("seatings", seatingService.findSeatingsByEvent(event));
-        return "/events/edit";
+        return "events/edit";
     }
 
 
@@ -296,7 +296,7 @@ public class EventController {
             model.addAttribute("selectedMenu", selectedMenu);
             model.addAttribute("layouts", availableLayouts);
             model.addAttribute("selectedLayout", selectedLayout);
-            return "/events/edit";
+            return "events/edit";
         }
 
         if (menuId == null || menuId.isEmpty()) {
@@ -322,7 +322,7 @@ public class EventController {
             model.addAttribute("menus", availableMenus);
             model.addAttribute("selectedMenu", selectedMenu);
             model.addAttribute("errorMessage", e.getMessage());
-            return "/events/edit";
+            return "events/edit";
         }
 
         return "redirect:/events";

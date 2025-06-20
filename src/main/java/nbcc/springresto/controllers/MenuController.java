@@ -42,7 +42,7 @@ public class MenuController {
         List<Menu> menus = menuService.findAll();
 
         model.addAttribute("menus", menus);
-        return "/menus/index";
+        return "menus/index";
     }
 
     @GetMapping("/menu/{id}")
@@ -62,27 +62,27 @@ public class MenuController {
         model.addAttribute("menuItem", menuItem);
         model.addAttribute("menuItems", menuItemService.findMenuItemsByMenu(menu));
         model.addAttribute("menuEvents", eventService.findAllByMenu(menu));
-        return "/menus/detail";
+        return "menus/detail";
     }
 
     @GetMapping("/menu/create")
     public String create(Model model) {
         model.addAttribute("menu", new Menu());
 
-        return "/menus/create";
+        return "menus/create";
     }
 
     @PostMapping("/menu/create")
     public String create(@ModelAttribute @Valid Menu menu, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("menu", menu);
-            return "/menus/create";
+            return "menus/create";
         }
 
         if (menuService.nameExists(menu.getName().trim())) {
             model.addAttribute("errorMessage", menu.getName() + " already exists.");
             model.addAttribute("menu", menu);
-            return "/menus/create";
+            return "menus/create";
         }
 
         try {
@@ -92,7 +92,7 @@ public class MenuController {
         } catch (Exception e) {
             model.addAttribute("errorMessage", e.getMessage());
             model.addAttribute("menu", menu);
-            return "/menus/create";
+            return "menus/create";
         }
     }
 
@@ -104,7 +104,7 @@ public class MenuController {
         }
 
         model.addAttribute("menu", menu);
-        return "/menus/edit";
+        return "menus/edit";
     }
 
     @PostMapping("/menu/edit/{id}")
@@ -112,13 +112,13 @@ public class MenuController {
                        BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("menu", menu);
-            return "/menus/edit";
+            return "menus/edit";
         }
 
         if (menuService.nameExists(menu.getName().trim())) {
             model.addAttribute("errorMessage", menu.getName() + " already exists.");
             model.addAttribute("menu", menu);
-            return "/menus/edit";
+            return "menus/edit";
         }
 
         try {
@@ -141,7 +141,7 @@ public class MenuController {
 
         model.addAttribute("menu", menu);
         model.addAttribute("menuEvents", eventService.findAllByMenu(menu));
-        return "/menus/delete";
+        return "menus/delete";
     }
 
     @PostMapping("/menu/delete/{id}")
@@ -153,7 +153,7 @@ public class MenuController {
                 model.addAttribute("errorMessage", "Cannot delete this Menu because it has associated events.");
                 model.addAttribute("menuEvents", eventService.findAllByMenu(menu));
                 model.addAttribute("menu", menu);
-                return "/menus/delete";
+                return "menus/delete";
             }
             menuService.deleteById(id);
 
@@ -172,6 +172,6 @@ public class MenuController {
 
         model.addAttribute("menu", menu);
         model.addAttribute("menuItems", menuItems);
-        return "/menus/detail";
+        return "menus/detail";
     }
 }

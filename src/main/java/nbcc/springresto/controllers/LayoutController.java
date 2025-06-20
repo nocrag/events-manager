@@ -44,14 +44,14 @@ public class LayoutController {
     @GetMapping("/layouts")
     public String getAll(Model model) {
         model.addAttribute("layouts", layoutService.findAll());
-        return "/layouts/index";
+        return "layouts/index";
     }
 
     @GetMapping("layout/create")
     public String create(Model model) {
         model.addAttribute("layout", new Layout());
 
-        return "/layouts/create";
+        return "layouts/create";
     }
 
     @GetMapping("/layout/{id}")
@@ -66,7 +66,7 @@ public class LayoutController {
         model.addAttribute("layout", layout);
         model.addAttribute("diningTables", layout.getDiningTables());
 
-        return "/layouts/detail";
+        return "layouts/detail";
     }
 
     @PostMapping("/layout/create")
@@ -90,7 +90,7 @@ public class LayoutController {
         var diningTables = layout.getDiningTables();
         model.addAttribute("layout", layout);
         model.addAttribute("diningTables", diningTables);
-        return "/layouts/edit";
+        return "layouts/edit";
 
     }
 
@@ -112,7 +112,7 @@ public class LayoutController {
         }
 
         model.addAttribute("layout", layout);
-        return "/layouts/delete";
+        return "layouts/delete";
     }
 
     @GetMapping("/layouts/archived")
@@ -127,14 +127,14 @@ public class LayoutController {
     public String edit(@Valid Layout layout, BindingResult bindingResult, Model model) {
 
         if (bindingResult.hasErrors()) {
-            return "/layouts/edit";
+            return "layouts/edit";
         }
 
         try {
             layoutService.update(layout.getId(), layout);
         } catch (Exception e) {
             model.addAttribute("errorMessage", e.getMessage());
-            return "/layouts/edit";
+            return "layouts/edit";
         }
 
         return "redirect:/layouts";

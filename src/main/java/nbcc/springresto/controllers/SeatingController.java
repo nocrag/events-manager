@@ -66,7 +66,7 @@ public class SeatingController {
         model.addAttribute("event", event);
         model.addAttribute("seating", seating);
 
-        return "/seatings/delete";
+        return "seatings/delete";
     }
 
     @PostMapping("/delete/{id}")
