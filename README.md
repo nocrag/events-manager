@@ -7,6 +7,7 @@ SpringResto is a full-stack restaurant event management web application built wi
 ## 🚀 Features
 
 - User login/logout
+- Create reservations
 - Create and edit events
 - Add seating times with duration
 - Assign menus and layouts to events
@@ -55,12 +56,3 @@ the database settings below.
 | MySQL Root Password  | root        |
 | Port                 | 3306        |
 
-### ⚙️ `application.properties`
-
-properties
-spring.datasource.url=jdbc:mysql://localhost:3306/springresto
-spring.datasource.username=devJPA
-spring.datasource.password=NBCC1234!
-spring.jpa.hibernate.ddl-auto=update
-spring.jpa.show-sql=true
-spring.thymeleaf.cache=false
