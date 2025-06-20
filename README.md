@@ -37,6 +37,7 @@ cd springresto
 
 # 3. Start the app with Docker
 docker compose up --build
+```
 
 ### 🔐 Database Configuration
 
